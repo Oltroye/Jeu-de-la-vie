@@ -1,5 +1,5 @@
 import random
-import json
+
 
 def generate_grid(size):
     return [[random.choice([0, 1]) for _ in range(size)] for _ in range(size)]
