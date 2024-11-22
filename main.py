@@ -1,7 +1,8 @@
 from grille.grid import generate_grid, display_grid
-from grille.save import save_grid,load_grid
+from grille.save import load_grid, save_grid
 from logique.rules import next_state
 import os
+import time
 
 def verify_nb():
     while True:
@@ -18,12 +19,11 @@ def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def main():
-    # Charger ou générer une nouvelle grille
     action = input("Appuyez sur N pour une nouvelle grille ou L pour charger une sauvegarde : ").strip().upper()
     if action == 'L':
         grille, tour = load_grid()
-        if grille is None:  # Si aucune sauvegarde n'existe
-            print("Aucune sauvegarde trouvée. Création d'une nouvelle grille.")
+        if grille is None:
+            print("Aucune sauvegarde disponible. Création d'une nouvelle grille.")
             taille = verify_nb()
             grille = generate_grid(taille)
             tour = 0
@@ -31,6 +31,8 @@ def main():
         taille = verify_nb()
         grille = generate_grid(taille)
         tour = 0
+
+    history = []  # Historique des grilles
 
     # Boucle principale
     while True:
@@ -42,13 +44,21 @@ def main():
         if action == 'S':
             save_grid(grille, tour)  # Sauvegarde de la grille et du numéro du tour
             print("Grille sauvegardée.")
+            time.sleep(3)  # Pause d'une seconde pour laisser le message visible
+            continue
         elif action == 'Q':
             print("Fin du jeu. Au revoir !")
             break
 
-        # Calculer la grille suivante
-        grille = next_state(grille)
+    # Calculer la grille suivante
+        next_grille = next_state(grille)
+        if next_grille == grille:  # Vérifie si la grille est stable
+            print(f"\nLa grille est stable au tour n°{tour}. Simulation arrêtée.")
+            break
+
+        grille = next_grille
         tour += 1
+
 
 if __name__ == "__main__":
     main()
