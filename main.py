@@ -90,7 +90,7 @@ def main():
         history.append(tuple(tuple(row) for row in grille))  # Ajoute une copie immuable de la grille
 
         # Demander à l'utilisateur de continuer ou de quitter
-        action = input("\nAppuyez sur Entrée pour passer au tour suivant, S sauvegarder et quitter ,ou Q pour quitter : ").strip().upper()
+        action = input("\nAppuyez sur Entrée pour passer au tour suivant, S sauvegarder et quitter ,ou Q pour quitter sans sauvegarder : ").strip().upper()
         if action == 'S':
             save_grid(grille, tour)
             print("Grille sauvegardée. Simulation arrêtée.")
