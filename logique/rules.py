@@ -27,3 +27,14 @@ def next_state(grid):
                 if living_neighbors == 3:
                     new_grid[i][j] = 1
     return new_grid
+
+def cycle_detect(grid, history):
+    """
+    Vérifie si la grille actuelle est dans l'historique et retourne la longueur du cycle.
+    """
+    grid_tuple = tuple(tuple(row) for row in grid)  # Convertit la grille en tuple
+    if grid_tuple in history:
+        cycle_start = history.index(grid_tuple)  # Trouve l'indice de la première occurrence
+        cycle_length = len(history) - cycle_start  # Calcule la longueur du cycle
+        return True, cycle_length
+    return False, 0
