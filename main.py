@@ -10,11 +10,11 @@ def verify_nb():
     """
     while True:
         try:
-            taille = int(input("Entrez la taille de la grille : "))
-            if taille > 0:
+            taille = int(input("Entrez la taille de la grille (entre 1 et 45): "))
+            if 1 <=taille <= 45:
                 return taille
             else:
-                print("Veuillez entrer un entier positif.")
+                print("Veuillez choisir un chiffre entre 1 et 45.")
         except ValueError:
             print("Entrée invalide. Veuillez entrer un entier.")
 
