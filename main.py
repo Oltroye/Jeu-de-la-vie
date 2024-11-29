@@ -90,9 +90,13 @@ def main():
         history.append(tuple(tuple(row) for row in grille))  # Ajoute une copie immuable de la grille
 
         # Demander à l'utilisateur de continuer ou de quitter
-        action = input("\nAppuyez sur Entrée pour passer au tour suivant, ou Q pour quitter : ").strip().upper()
+        action = input("\nAppuyez sur Entrée pour passer au tour suivant, S pour enregistrer ou Q pour quitter : ").strip().upper()
         if action == 'Q':
             print("Fin du jeu. Au revoir !")
+            break
+        if action == 'S':
+            save_grid(grille, tour)
+            print("enregistrement de la grille")
             break
 
         # Passer au tour suivant
