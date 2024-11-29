@@ -1,6 +1,14 @@
 def count_neighbors(grid, i, j):
     """
     Compte le nombre de voisins vivants d'une cellule donnée dans une grille.
+
+    Args:
+        grid (list[list[int]]): La grille représentant les cellules, où 1 est vivant et 0 est mort.
+        i (int): La position de la cellule sur l'axe des lignes.
+        j (int): La position de la cellule sur l'axe des colonnes.
+
+    Returns:
+        int: Le nombre de cellules vivantes autour de la cellule (i, j).
     """
     # Liste des positions relatives des voisins autour d'une cellule
     neighbors = [
@@ -24,6 +32,12 @@ def count_neighbors(grid, i, j):
 def next_state(grid):
     """
     Calcule l'état suivant de la grille selon les règles du jeu de la vie de Conway.
+
+    Args:
+        grid (list[list[int]]): La grille actuelle.
+
+    Returns:
+        list[list[int]]: La nouvelle grille après application des règles.
     """
     n = len(grid)  # Taille de la grille (supposée carrée)
     # Initialise une nouvelle grille remplie de zéros
@@ -53,6 +67,14 @@ def cycle_detect(grid, history):
     """
     Vérifie si la grille actuelle est déjà apparue dans l'historique
     (indiquant un cycle) et retourne la longueur du cycle si trouvé.
+
+    Args:
+        grid (list[list[int]]): La grille actuelle.
+        history (list[tuple[tuple[int]]]): Historique des grilles précédentes, chaque grille étant convertie en tuple.
+
+    Returns:
+        tuple[bool, int]: Un booléen indiquant si un cycle est détecté,
+                          et la longueur du cycle (0 si aucun cycle).
     """
     # Convertit la grille actuelle en un tuple de tuples (pour pouvoir la comparer dans l'historique)
     grid_tuple = tuple(tuple(row) for row in grid)
